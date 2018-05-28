@@ -10,7 +10,6 @@ var rate = document.querySelector('#rate');
 var rateValue = document.querySelector('.rate-value');
 
 var voices = [];
-//var utterThis;
 
 function populateVoiceList() {
   voices = synth.getVoices();

@@ -27,4 +27,4 @@ This currently works in Chrome and Firefox.
 
 Listen and be part of a simple chat .
 
-This currently works in ?.
+This currently works in Chrome/Chrome Mobile.

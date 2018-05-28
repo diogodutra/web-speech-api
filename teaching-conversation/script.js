@@ -42,14 +42,35 @@ conversation2.push({name: 'lady1', phrase: 'No sir. I don\'t understand Portugue
 conversation2.push({name: 'man1', phrase: 'I understand a little English.'});
 conversation2.push({name: 'lady1', phrase: 'Are you Brazilian?'});
 conversation2.push({name: 'man1', phrase: 'Yes miss.'});
-conversation2.push({name: 'professora', phrase: 'Em alguns minutos você entenderá tudo e participará dessa conversa.'});
+conversation2.push({name: 'professora', phrase: 'Em alguns minutos você entenderá essa conversa e participará dela.'});
 conversation2.push({name: 'professora', phrase: 'Imagine um brasileiro na Inglaterra sentado ao lado de uma jovem.'});
 conversation2.push({name: 'professora', phrase: 'Ele tenta conversar com ela.'});
 conversation2.push({name: 'professora', phrase: 'Então ele diz com licença.'});
+conversation2.push({name: 'professora', phrase: 'Repita depois dele.'});
+conversation2.push({name: 'man1', phrase: 'Excuse me.'});
+conversation2.push({name: 'student', phrase: 'Excuse me.'});
+conversation2.push({name: 'professora', phrase: 'Como se diz com licença ou desculpe me em inglês?'});
+conversation2.push({name: 'student', phrase: 'Excuse me.'});
+conversation2.push({name: 'man1', phrase: 'Excuse me.'});
+conversation2.push({name: 'professora', phrase: 'Agora ele pergunta à moça se ela entende português.'});
+conversation2.push({name: 'professora', phrase: 'Primeiro português.'});
+conversation2.push({name: 'professora', phrase: 'Escute e repita.'});
+conversation2.push({name: 'man1', phrase: 'Portuguese.'});
+conversation2.push({name: 'student', phrase: 'Portuguese.'});
+conversation2.push({name: 'professora', phrase: 'Como se diz português na língua inglesa?'});
+conversation2.push({name: 'student', phrase: 'Portuguese.'});
+conversation2.push({name: 'professora', phrase: 'Diga com licença.'});
+conversation2.push({name: 'student', phrase: 'Excuse me.'});
+conversation2.push({name: 'man1', phrase: 'Excuse me.'});
 
+
+var reinforce = new Array();
+reinforce.push({name: 'professora', phrase: 'Repita depois.'});
 
 var rightAnswer = 'I heard the correct phrase!';
 var wrongAnswer =  'That didn\'t sound right.';
+var firstMistake = -1;
+var firstMistakeWord = [];
 
 var phrasePara = document.querySelector('.phrase');
 var resultPara = document.querySelector('.result');
@@ -131,8 +152,34 @@ function speak(){
 
 
 
+function repeatSyllables(word) {
+	var urlGET = 'https://wordsapiv1.p.mashape.com/words/' + word + '/syllables';
+	httpGetAsync(urlGET, repeatWord);
+	
+}
 
+function httpGetAsync(theUrl, callback)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+            callback(xmlHttp.responseText);
+    }
+    xmlHttp.open("GET", theUrl, true); // true for asynchronous
+    xmlHttp.send(null);
+	
+	console.log('httpGetAsync', theUrl, xmlHttp.responseText);
+}
 
+function getSyllables(word) {
+var urlGET = 'https://wordsapiv1.p.mashape.com/words/' + word + '/syllables';
+unirest.get(urlGET)
+.header("X-Mashape-Key", "rQFMGPDcBUmsh2AkqtjiGcMSIqCIp1tpqbDjsnah4TjpjAoMK9")
+.header("X-Mashape-Host", "wordsapiv1.p.mashape.com")
+.end(function (result) {
+  console.log(result.status, result.headers, result.body);
+});
+}
 
 function PrepareForComparison(str) {
   str = str.toLowerCase();
@@ -173,12 +220,30 @@ function listen(phrase) {
     var speechResult = event.results[0][0].transcript;
     diagnosticPara.textContent = 'Speech received: ' + speechResult + '.';
     //if(speechResult === phrase) {
-    if(PrepareForComparison(speechResult) == PrepareForComparison(phrase)) {
+	speechResult = PrepareForComparison(speechResult)
+	phrase = PrepareForComparison(phrase)
+    if(speechResult == phrase) {
       resultPara.textContent = 'I heard the correct phrase!';
       resultPara.style.background = 'lime';
+	
+	  resumeChat(); //DD
     } else {
       resultPara.textContent = 'That didn\'t sound right.';
       resultPara.style.background = 'red';
+	  splitSpeech = speechResult.split(" ");
+	  splitPhrase = phrase.split(" ");
+	  firstMistake = -1;
+	  firstMistakeWord = [];
+	  for (i=0; i<splitPhrase.length; i++) {
+		  if (splitPhrase[i] != splitSpeech[i]) {
+			firstMistakeIndex =  i;
+			firstMistakeWord = splitPhrase[i];
+			break;
+		  } 
+	  }
+	  repeatWord(firstMistakeWord);
+	  
+	  //resumeChat(); //no correction
     }
 
     console.log('Confidence: ' + event.results[0][0].confidence);
@@ -188,8 +253,6 @@ function listen(phrase) {
     recognition.stop();
     testBtn.disabled = false;
     testBtn.textContent = 'Start new test';
-	
-	resumeChat(); //DD
   }
 
   recognition.onerror = function(event) {
@@ -239,14 +302,21 @@ function listen(phrase) {
 }
 
 
+function repeatWord(word) {
+	listen(conversation[iTurn-1].phrase);
+}
+
 function restartChat() {  
   iTurn = 0;//nao deveria dar bug
+  
+  //repeatSyllables('Understand');
+	
+  conversation = conversation2;
+	
   resumeChat();
 }
 
 function resumeChat() {
-	
-	conversation = conversation1;
 	
 	if (iTurn<conversation.length) {
 		//setTimeout(function(){
