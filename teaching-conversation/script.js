@@ -35,6 +35,7 @@ conversation1.push({name: 'professora', phrase: 'Fim da aula 1.'});
 
 
 var conversation2 = new Array();
+conversation2.push({name: 'student', phrase: 'Excuse me.'});
 conversation2.push({name: 'professora', phrase: 'Aula de conversação 2.'});
 conversation2.push({name: 'professora', phrase: 'Escute essa conversa em inglês.'});
 conversation2.push({name: 'man1', phrase: 'Excuse me miss. Do you understand Portuguese?'});
@@ -137,6 +138,7 @@ function speak(){
     //}
 	
 	//DD
+	utterThis.voice = voices[19];
 	if (conversation[iTurn].name == 'professora') utterThis.voice = voices[19];
 	if (conversation[iTurn].name == 'lady1') utterThis.voice = voices[0];
 	if (conversation[iTurn].name == 'man1') utterThis.voice = voices[8];
@@ -346,7 +348,7 @@ function askTrainSyllables() {
 function askTrainWord(word) {
 	trainWord = true;
 	wordToBeTrained = word;
-	iTurn--;
+	//iTurn--;
 }
 
 function repeatWord(word) {
