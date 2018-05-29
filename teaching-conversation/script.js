@@ -120,11 +120,11 @@ function speak(){
         return;
     }
     if (inputTxt.value !== '') {
-    var utterThis = new SpeechSynthesisUtterance(inputTxt.value);
-    utterThis.onend = function (event) {
-        console.log('SpeechSynthesisUtterance.onend');
-		
-		resumeChat();
+		var utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+		utterThis.onend = function (event) {
+			console.log('SpeechSynthesisUtterance.onend');
+			
+			resumeChat();
     }
     utterThis.onerror = function (event) {
         console.error('SpeechSynthesisUtterance.onerror');
@@ -151,34 +151,54 @@ function speak(){
 
 
 
-
-function repeatSyllables(word) {
-	var urlGET = 'https://wordsapiv1.p.mashape.com/words/' + word + '/syllables';
-	httpGetAsync(urlGET, repeatWord);
+function repeatSyllables(json_syllables) {
+	console.log('repeatSyllables', json_syllables);
 	
-}
-
-function httpGetAsync(theUrl, callback)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function() { 
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-            callback(xmlHttp.responseText);
-    }
-    xmlHttp.open("GET", theUrl, true); // true for asynchronous
-    xmlHttp.send(null);
-	
-	console.log('httpGetAsync', theUrl, xmlHttp.responseText);
+	for (i = 0; i < json_syllables.count; i++) {
+		say(json_syllables.list[i]);
+		listen(json_syllables.list[i]);
+	}
 }
 
 function getSyllables(word) {
-var urlGET = 'https://wordsapiv1.p.mashape.com/words/' + word + '/syllables';
-unirest.get(urlGET)
-.header("X-Mashape-Key", "rQFMGPDcBUmsh2AkqtjiGcMSIqCIp1tpqbDjsnah4TjpjAoMK9")
-.header("X-Mashape-Host", "wordsapiv1.p.mashape.com")
-.end(function (result) {
-  console.log(result.status, result.headers, result.body);
-});
+	nSyllables = 0;
+	
+	const url = 'https://wordsapiv1.p.mashape.com/words/' + word + '/syllables';
+	
+	fetch(url, {
+		method: 'GET',
+		headers: {
+		'X-Mashape-Key': 'rQFMGPDcBUmsh2AkqtjiGcMSIqCIp1tpqbDjsnah4TjpjAoMK9',
+		'Accept': 'application/json'
+		}
+	})
+	.then(function(res) {
+	// Here you get the data to modify as you please
+	
+		if (res.ok) {
+			res.json().then(function(data) {
+				console.log('getSyllables', word, data.syllables);
+				
+				iSyllables = 0;
+				nSyllables = data.syllables.count;
+				json_syllables = data.syllables;
+				//repeatSyllables(data.syllables)
+		
+				resumeChat();
+			});
+		} else {
+			console.log("Looks like the response wasn't perfect, got status", res.status);
+		
+			resumeChat();
+		}
+		
+		//resumeChat();
+	})
+	.catch(function(error) {
+		// If there is any error you will catch them here
+		
+		resumeChat(); //BUG falta tratar erros
+	});
 }
 
 function PrepareForComparison(str) {
@@ -219,32 +239,44 @@ function listen(phrase) {
     // We then return the transcript property of the SpeechRecognitionAlternative object 
     var speechResult = event.results[0][0].transcript;
     diagnosticPara.textContent = 'Speech received: ' + speechResult + '.';
+	console.log('Speech received: ' + speechResult + '.');
     //if(speechResult === phrase) {
 	speechResult = PrepareForComparison(speechResult)
 	phrase = PrepareForComparison(phrase)
     if(speechResult == phrase) {
+	  saidCorrectly = true;
       resultPara.textContent = 'I heard the correct phrase!';
       resultPara.style.background = 'lime';
-	
-	  resumeChat(); //DD
     } else {
+	  saidCorrectly = false;
+	  console.log('Speech result: ' + phrase + ' <> ' + speechResult);
+				
       resultPara.textContent = 'That didn\'t sound right.';
       resultPara.style.background = 'red';
 	  splitSpeech = speechResult.split(" ");
 	  splitPhrase = phrase.split(" ");
-	  firstMistake = -1;
-	  firstMistakeWord = [];
-	  for (i=0; i<splitPhrase.length; i++) {
-		  if (splitPhrase[i] != splitSpeech[i]) {
-			firstMistakeIndex =  i;
-			firstMistakeWord = splitPhrase[i];
-			break;
-		  } 
-	  }
-	  repeatWord(firstMistakeWord);
-	  
-	  //resumeChat(); //no correction
+	  //if (splitPhrase.length == 1) {
+		//difficulties speaking 1 particular word
+		//askTrainSyllables();
+	  //} else {
+		//difficulties speaking word(s) inside a phrase
+		//firstMistake = -1;
+		firstMistakeWord = [];
+		for (i=0; i<splitPhrase.length; i++) {
+		   if (splitPhrase[i] != splitSpeech[i]) {
+				//firstMistakeIndex =  i;
+				firstMistakeWord = splitPhrase[i];
+				askTrainWord(firstMistakeWord);
+				break;
+			} 
+		}
+		  //repeatWord(firstMistakeWord);
+		  
+		  //resumeChat(); //no correction
+	  //}
     }
+	
+	resumeChat(); //DD
 
     console.log('Confidence: ' + event.results[0][0].confidence);
   }
@@ -274,6 +306,8 @@ function listen(phrase) {
   recognition.onend = function(event) {
       //Fired when the speech recognition service has disconnected.
       console.log('SpeechRecognition.onend');
+	
+	//resumeChat(); //DD BUG chat continua se ficar quieto, deveria inisitir treinamento se aplicavel
   }
   
   recognition.onnomatch = function(event) {
@@ -302,6 +336,19 @@ function listen(phrase) {
 }
 
 
+
+
+
+function askTrainSyllables() {
+	trainSyllables = true;
+}
+
+function askTrainWord(word) {
+	trainWord = true;
+	wordToBeTrained = word;
+	iTurn--;
+}
+
 function repeatWord(word) {
 	listen(conversation[iTurn-1].phrase);
 }
@@ -309,16 +356,65 @@ function repeatWord(word) {
 function restartChat() {  
   iTurn = 0;//nao deveria dar bug
   
-  //repeatSyllables('Understand');
+  //askTrainWord('Important');
+  //wordToBeTrained = 'Understand';
+  //askTrainSyllables();
 	
   conversation = conversation2;
 	
   resumeChat();
 }
 
+var trainWord = false;
+var trainSyllables = false;
+var wordToBeTrained;
+var state = 'resuming';
+var iSyllables = 0;
+var nSyllables = 0;
+var json_syllables;
+var saidCorrectly = false;
 function resumeChat() {
 	
-	if (iTurn<conversation.length) {
+	if (trainSyllables) {
+		if (state == 'resuming') {
+			getSyllables(wordToBeTrained);
+			state = 'waitingSyllables';
+			iSyllables = 0;
+		} else if (state =='waitingSyllables' || state =='sayingSyllable') {
+			if (nSyllables == 0) {
+				//problem BUG falta tratar
+				state = 'resuming';
+				trainSyllables = false;
+			} else {
+				say(json_syllables.list[iSyllables]);
+				state = 'listeningSyllable';
+			}
+		} else {
+			saidCorrectly = false;
+			listen(json_syllables.list[iSyllables]);
+			state = 'sayingSyllable';
+			if (saidCorrectly) {
+				iSyllables++;
+			}
+			if (iSyllables == nSyllables) {
+				trainSyllables = false;
+				state = 'resuming';
+			//} else {
+			//	resumeChat();
+			}
+		}
+		
+	} else if (trainWord) {
+		if (state=='resuming') {
+			state = 'trainingWord';
+			say(wordToBeTrained);
+		} else {
+			state = 'resuming';
+			trainWord = false;
+			listen(wordToBeTrained);
+		}
+		
+	} else if (iTurn < conversation.length) {
 		//setTimeout(function(){
 		if (conversation[iTurn].name == 'student') {
 			listen(conversation[iTurn].phrase);
