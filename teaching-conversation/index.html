@@ -8,47 +8,88 @@
     <title>Teaching conversation</title>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="animationsheet" href="animate.css">
     <!--[if lt IE 9]>
       <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+	
   </head>
 
   <body>
+  <!--
     <h1>Do you know Portuguese?</h1>
-
-    <p>Enter some text in the input below and press return  or the "play" button to hear it. change voices using the dropdown menu.</p>
-    
-    <form>
-    <input type="text" class="txt">
-	<!--
-    <div>
-      <label for="rate">Rate</label><input type="range" min="0.5" max="2" value="1" step="0.1" id="rate">
-      <div class="rate-value">1</div>
-      <div class="clearfix"></div>
-    </div>
-    <div>
-      <label for="pitch">Pitch</label><input type="range" min="0" max="2" value="1" step="0.1" id="pitch">
-      <div class="pitch-value">1</div>
-      <div class="clearfix"></div>
-    </div>
-	<!-->
-    <select>
-
-    </select>
-    <div class="controls">
-      <button id="play" type="submit">Play</button>
-    </div>
-    </form>
 	
+    <p>Phrase spoken by the character.</p>
+    <p id='triangle-border' class="triangle-border">.</p>
+	
+    <p id='score' class="site__title mega">+1</p>
+-->
+    <p id='triangle-border' class="dialogBox">.</p>
+	
+    <ul class="container">
+      <li>
+        <div id='play' class="button active"> ►</div>
+      </li>
+	  <!--
+      <li>
+        <div class="button active">+</div>
+      </li>
+      <li>
+        <div class="button large">Press me</div>
+      </li>
+	  -->
+    </ul>
+    
+	
+	<div id='cards'>
+		<div id='cardLeft' class='music-card playing'>  
+			<div class='image-left'></div>
 
-    <button id="microphone">Start new test</button>
+			<div class='wave'></div>
+			<div class='wave'></div>
+			<div class='wave'></div>
 
-    <div>
-        <p class="phrase">Phrase...</p>
-        <p class="result">Right or wrong?</p>
-        <p class="output">...diagnostic messages</p>
-    </div>
+			<div class='info'>
+				<h2 class='title'>Lady</h2>
+				<!--<div class='artist'>.</div>-->
+			</div>
 
+			<i class="fa fa-pause trigger" aria-hidden="true"></i>
+			<i class="fa fa-play trigger" aria-hidden="true"></i>
+		</div>
+	
+		<div id='cardRight' class='music-card playing'>  
+			<div class='image-right'></div>
+
+			<div class='wave'></div>
+			<div class='wave'></div>
+			<div class='wave'></div>
+
+			<div class='info'>
+				<h2 class='title'>Brazilian</h2>
+				<!--<div class='artist'>.</div>-->
+			</div>
+
+			<i class="fa fa-pause trigger" aria-hidden="true"></i>
+			<i class="fa fa-play trigger" aria-hidden="true"></i>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-sm-6">
+				<div id='scoreBox' class="box">
+					<!--<img src="images/img-1.jpg">-->
+					<div class="box-content">
+						<h3 id='scorePoints' class="title">+1 ponto</h3>
+						<span id='scorePhrase' class="post">.</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
