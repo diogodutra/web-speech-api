@@ -21,16 +21,17 @@
 	
     <p>Phrase spoken by the character.</p>
     <p id='triangle-border' class="triangle-border">.</p>
-	
-    <p id='score' class="site__title mega">+1</p>
 -->
     <p id='triangle-border' class="dialogBox">.</p>
 	
+	  <!--
     <ul class="container">
       <li>
         <div id='play' class="button active"> ►</div>
       </li>
-	  <!--
+      <li>
+        <div id='share' class="button2 tick"></div>
+      </li>
       <li>
         <div class="button active">+</div>
       </li>
@@ -39,6 +40,12 @@
       </li>
 	  -->
     </ul>
+	
+	<div class="buttonHolder">
+		<a id='rewindBtn' href="#" class="button2 rewind"></a>
+		<div id='play' class="button active">►</div>
+		<a id='open-popup' href="#" class="button2 mail"></a>
+	</div>
     
 	
 	<div id='cards'>
@@ -88,6 +95,18 @@
 			</div>
 		</div>
 	</div>
+	
+	<!--<button id='open-popup'>Subscribe to our mailing list</button>-->
+	<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">require(["mojo/signup-forms/Loader"])</script>
+	<script>
+function showMailingPopUp() {
+require(['mojo/signup-forms/Loader'], function(L) { L.start({"baseUrl":"mc.us18.list-manage.com","uuid":"b75ca87fb757fd4baf13875fa","lid":"19766f499e"}) })
+
+var date = new Date(); date.setTime(date.getTime()+(1*1000)); expires = " expires="+date.toGMTString() + '; path=/';
+document.cookie = 'MCPopupClosed=;' + expires; <!-- expires=Thu, 01 Jan 1970 00:00:00 UTC';-->
+};
+document.getElementById('open-popup').onclick = function() {showMailingPopUp()};
+</script>
 	
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="script.js"></script>

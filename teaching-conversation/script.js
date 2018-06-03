@@ -25,6 +25,8 @@ var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
 var iTurn = 0;
+var repetitions = 0;
+
 var conversation = new Array();
 
 const professora = 'Microsoft Maria Desktop - Desktop(Brazil)';
@@ -190,6 +192,7 @@ conversation2.push({name: user, phrase: 'No, sir.', score:1});
 conversation2.push({name: professora, phrase: 'Como se diz eu entendo?'});
 conversation2.push({name: user, phrase: 'I understand.', score:1});
 conversation2.push({name: professora, phrase: 'Agora ela quer dizer. Eu não entendo.'});
+conversation2.push({name: professora, phrase: 'Fim da aula 2.'});
 
 
 
@@ -205,6 +208,7 @@ var resultPara = document.querySelector('.result');
 var diagnosticPara = document.querySelector('.output');
 
 var testBtn = document.querySelector('#microphone');
+var rewindBtn = document.querySelector('#rewindBtn');
 
 var voiceMan;
 var voiceLady;
@@ -374,6 +378,8 @@ function PrepareForComparison(str) {
   return str;
 }
 
+var recognition = new SpeechRecognition();
+
 function listen(objConversation) {
   saidCorrectly = false;
   //testBtn.disabled = true;
@@ -387,7 +393,7 @@ function listen(objConversation) {
   var phrase = objConversation.phrase;
 
   var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase +';';
-  var recognition = new SpeechRecognition();
+  //var recognition = new SpeechRecognition();
   var speechRecognitionList = new SpeechGrammarList();
   speechRecognitionList.addFromString(grammar, 1);
   recognition.grammars = speechRecognitionList;
@@ -450,6 +456,7 @@ function listen(objConversation) {
 		  //resumeChat(); //no correction
 	  //}
     }
+	
 	resumeChat(); //DD
 
     console.log('Confidence: ' + event.results[0][0].confidence);
@@ -533,27 +540,75 @@ function repeatWord(word) {
 	listen(conversation[iTurn-1]);
 }
 
+function cancelTrainPhrase() {
+	repetitions = 0;
+	trainPhrase = false;
+}
+
 function askTrainPhrase(phrase) {
-	trainPhrase = true;
-	wordToBeTrained = phrase;
-	//iTurn--;
+	if (repetitions < 2) {
+		trainPhrase = true;
+		wordToBeTrained = phrase;
+		repetitions++;
+		//iTurn--;
 	if (iTurn<0) {iTurn=0;}
+	} else {
+		cancelTrainPhrase();
+	}
+}
+
+function rewindChat() {
+	//pauseChat();
+	//synth.cancel();
+	//iTurn = 0;
+	//playChat();
+	//restartChat();
+	
+	
+	pauseChat();
+	
+	setTimeout(function(){
+		iTurn = 0;
+		playChat();
+	},1000);
 }
 
 function pauseChat() {
 	chatPaused = true;
+    var recognition = new SpeechRecognition();
+	recognition.abort();
+	recognition.stop();
 	synth.cancel();
+	oneBackChat();
+}
+
+function oneBackChat() {
 	iTurn--;
+	if (iTurn < 0) {
+		iTurn = 0;
+	}
 }
 
 function playChat() {	
 	chatPaused = false;
 	
+	/*
+	if (conversation[iTurn].name == user) {
+		iTurn--;
+	}
+	
+	if (iTurn < 0) {
+		iTurn = 0;
+	}
+	*/
+	
 	resumeChat();
 	//synth.resume();
 }
 
-function restartChat() {  
+function restartChat() { 
+  playChat();
+
   iTurn = 0;//nao deveria dar bug
   
   //askTrainWord('Important');
@@ -567,7 +622,7 @@ function restartChat() {
 	//$(".box").toggleClass("hovered");
 	//$(".box").hovered;
 	//$('.box').addClass('hovered');
-	$('scoreBox').addClass('hover');
+	//$('scoreBox').addClass('hover');
 	//$('.box').addClass('hover');
 	//$(".box").css("color", "ccff00");
 	//var scoreBox = document.getElementById('scoreBox');
@@ -688,7 +743,12 @@ function resumeChat() {
   }
 }
 
-
+rewindBtn.addEventListener('click', function(){
+	//pauseChat();
+	//playChat();
+	//restartChat();
+	rewindChat();
+});
 
 //testBtn.addEventListener('click', restartChat);
 setTimeout(function(){
@@ -755,3 +815,4 @@ $(document).ready( function () {
 	}
   });
 });
+
