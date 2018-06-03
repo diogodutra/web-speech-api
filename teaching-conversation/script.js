@@ -27,7 +27,6 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 
 var nTurn = 0;
 var iTurn = 0;
-var steps = 0;
 var repetitions = 0;
 
 var conversation = new Array();
@@ -625,7 +624,6 @@ function restartChat() {
   conversation = conversation2;
   
   nTurn = conversation.length;
-  steps = 100 / nTurn;
   progressBar.value = 0;
 	
   resumeChat();
@@ -735,7 +733,7 @@ function resumeChat() {
 		
 	} else if (iTurn < conversation.length) {
 		//setTimeout(function(){
-		progressBar.value += steps;
+		progressBar.value = iTurn / nTurn * 100;
 			
 		if (conversation[iTurn].name == user) {
 			listen(conversation[iTurn]);

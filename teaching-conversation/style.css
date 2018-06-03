@@ -599,6 +599,7 @@ body {
 .mail:hover:after{
 	color:#83d244;
 	text-shadow:0px 0px 6px #83d244;
+	top: 15px;
 }
 
 .rewind:hover:after{
@@ -763,7 +764,7 @@ MAIN TITLE
 *****************************************/
 .title{
   color:#555;
-  font:20px Poiret One;
+  font:30px Poiret One;
   #text-transform:uppercase;
   #text-shadow:#000 0px 2px 10px;
   -webkit-box-reflect: below -15px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.2)));
