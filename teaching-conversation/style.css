@@ -15,7 +15,7 @@ body {
 h1, p {
   font-family: sans-serif;
   text-align: center;
-  //padding: 20px;
+  #padding: 20px;
   
   font-size: 1.4em;
   font-size: .4em;
@@ -493,9 +493,9 @@ body {
 
 
 .buttonHolder{
-  margin:80px auto;
+  margin:20px auto;
   width:600px;
-  height:30px;
+  height:80px;
   display: table-cell;
   display: table;
   display: flex;
@@ -622,3 +622,166 @@ body {
 	color:#dbd2d2;
 	text-shadow: 0px -1px 1px #bdb5b4, 0px 1px 1px white;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*****************************************
+MAIN CONTAINER
+*****************************************/
+#container{
+  width:1000px;
+  margin:0 auto;
+  margin-top:30px;
+  padding-bottom:10px;
+  #display: flex;
+  #justify-content: center;
+}
+
+/*****************************************
+PROGRESS CONTAINER
+*****************************************/
+.progress{
+  width:500px;
+  float:left;
+  margin-left: 150px;
+}
+
+/*****************************************
+PROGRESS ELEMENTS
+*****************************************/
+progress{
+  width:100%;
+  height:5px;
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/*****************************************
+PROGRESS ELEMENT - MAIN BAR
+*****************************************/
+progress[value]::-webkit-progress-bar{
+  box-shadow: inset 4px 6px 10px -4px rgba(250,250,250,0.3), 0 1px 1px -1px rgba(255,255,255,0.3);
+	background: rgba(150,150,150,0.1);
+  border-radius:30px;
+  border:1px solid rgba(200,200,200,0.4);
+}
+
+/*****************************************
+PROGRESS ELEMENT - FILL BAR
+*****************************************/
+progress[value]::-webkit-progress-value{
+  border-radius:30px;
+  background:rgba(200,255,200,0.9);
+  box-shadow:rgba(200,255,200,0.3) 0px 0px 10px;
+  border:1px solid rgba(0,0,0,0.4);
+  -webkit-animation:load 4s;
+  -moz-animation:load 4s;
+  -o-animation:load 4s;
+  -ms-animation:load 4s;
+  animation:load 4s;
+  -webkit-transition:ease 1s;
+  -moz-transition:ease 1s;
+  -o-transition:ease 1s;
+  -ms-transition:ease 1s;
+  transition:ease 1s;
+}
+
+/*****************************************
+PROGRESS LOADING ANIMATION
+*****************************************/
+@-webkit-keyframes load{
+  0%{
+     width:0px;
+  }
+}
+
+@-moz-keyframes load{
+  0%{
+     width:0px;
+  }
+}
+
+@-o-keyframes load{
+  0%{
+     width:0px;
+  }
+}
+
+@-ms-keyframes load{
+  0%{
+     width:0px;
+  }
+}
+
+@keyframes load{
+  0%{
+     width:0px;
+  }
+}
+
+/*****************************************
+TUTORIAL INFORMATION
+*****************************************/
+.description{
+  float:left;
+  width:40%;
+  margin-left:50px;
+  h1{
+    color:#FFF;
+    text-shadow:#000 0px 1px 2px;
+    font:20px Oswald;
+    text-transform:uppercase;
+    margin:0px;
+    margin-top:5px;
+  }  
+  p{
+    color:#FFF;
+    text-shadow:#000 0px 1px 2px;
+    font:15px Oswald;
+    margin-bottom:5px;
+    line-height:20px;
+  }
+}
+
+/*****************************************
+TYPOGRAPHY CLASSES
+*****************************************/
+
+/*****************************************
+MAIN TITLE
+*****************************************/
+.title{
+  color:#555;
+  font:20px Poiret One;
+  #text-transform:uppercase;
+  #text-shadow:#000 0px 2px 10px;
+  -webkit-box-reflect: below -15px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.2)));
+}
+
+/*****************************************
+TAG CLASS
+*****************************************/
+.tag{
+  color:#8F8F8F;
+}
+
+/*****************************************
+SMALL SLASH
+*****************************************/
+.small{
+  font-size:12px;
+}
+
+
+

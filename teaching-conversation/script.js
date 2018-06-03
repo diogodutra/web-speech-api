@@ -5,6 +5,7 @@ var inputTxt = document.querySelector('.txt');
 //var voiceSelect = document.querySelector('select');
 //var inputTxt = document.querySelector('.triangle-border');
 var dialogBox = document.getElementById('triangle-border');
+var progressBar = document.getElementById('progressBar');
 
 //var pitch = document.querySelector('#pitch');
 //var pitchValue = document.querySelector('.pitch-value');
@@ -24,7 +25,9 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
 var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent;
 
+var nTurn = 0;
 var iTurn = 0;
+var steps = 0;
 var repetitions = 0;
 
 var conversation = new Array();
@@ -566,13 +569,8 @@ function askTrainPhrase(phrase) {
 	}
 }
 
-function rewindChat() {
-	//pauseChat();
-	//synth.cancel();
-	//iTurn = 0;
-	//playChat();
-	//restartChat();
-	
+function rewindChat() {	
+	progressBar.value = 0;
 	
 	pauseChat();
 	
@@ -625,6 +623,10 @@ function restartChat() {
   //askTrainSyllables();
 	
   conversation = conversation2;
+  
+  nTurn = conversation.length;
+  steps = 100 / nTurn;
+  progressBar.value = 0;
 	
   resumeChat();
   
@@ -733,6 +735,8 @@ function resumeChat() {
 		
 	} else if (iTurn < conversation.length) {
 		//setTimeout(function(){
+		progressBar.value += steps;
+			
 		if (conversation[iTurn].name == user) {
 			listen(conversation[iTurn]);
 		} else {
