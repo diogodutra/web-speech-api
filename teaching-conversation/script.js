@@ -379,29 +379,33 @@ function PrepareForComparison(str) {
 }
 
 var recognition = new SpeechRecognition();
+var waitingSpeech = false;
 
 function listen(objConversation) {
-  saidCorrectly = false;
-  //testBtn.disabled = true;
-  //testBtn.textContent = 'Test in progress';
+	if (!waitingSpeech) {		
+		saidCorrectly = false;
+		//testBtn.disabled = true;
+		//testBtn.textContent = 'Test in progress';
 
-  //phrasePara.textContent = phrase;
-  //resultPara.textContent = 'Right or wrong?';
-  //resultPara.style.background = 'rgba(0,0,0,0.2)';
-  //diagnosticPara.textContent = '...diagnostic messages';
-  
-  var phrase = objConversation.phrase;
+		//phrasePara.textContent = phrase;
+		//resultPara.textContent = 'Right or wrong?';
+		//resultPara.style.background = 'rgba(0,0,0,0.2)';
+		//diagnosticPara.textContent = '...diagnostic messages';
 
-  var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase +';';
-  //var recognition = new SpeechRecognition();
-  var speechRecognitionList = new SpeechGrammarList();
-  speechRecognitionList.addFromString(grammar, 1);
-  recognition.grammars = speechRecognitionList;
-  recognition.lang = 'en-US';
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
+		var phrase = objConversation.phrase;
 
-  recognition.start();
+		var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrase +';';
+		//var recognition = new SpeechRecognition();
+		var speechRecognitionList = new SpeechGrammarList();
+		speechRecognitionList.addFromString(grammar, 1);
+		recognition.grammars = speechRecognitionList;
+		recognition.lang = 'en-US';
+		recognition.interimResults = false;
+		recognition.maxAlternatives = 1;
+
+		waitingSpeech = true;
+		recognition.start();
+	}
 
   recognition.onresult = function(event) {
     // The SpeechRecognitionEvent results property returns a SpeechRecognitionResultList object
@@ -457,6 +461,7 @@ function listen(objConversation) {
 	  //}
     }
 	
+	waitingSpeech = false;
 	resumeChat(); //DD
 
     console.log('Confidence: ' + event.results[0][0].confidence);
@@ -466,6 +471,7 @@ function listen(objConversation) {
     recognition.stop();
     //testBtn.disabled = false;
     //testBtn.textContent = 'Start new test';
+	waitingSpeech = false;
   }
 
   recognition.onerror = function(event) {
@@ -476,6 +482,7 @@ function listen(objConversation) {
 	
 	askTrainPhrase(phrase);
 	
+	waitingSpeech = false;
 	resumeChat(); //DD
   }
   
@@ -493,6 +500,7 @@ function listen(objConversation) {
       //Fired when the speech recognition service has disconnected.
       console.log('SpeechRecognition.onend');
 	
+	waitingSpeech = false;
 	//resumeChat(); //DD BUG chat continua se ficar quieto, deveria inisitir treinamento se aplicavel
   }
   
@@ -543,6 +551,7 @@ function repeatWord(word) {
 function cancelTrainPhrase() {
 	repetitions = 0;
 	trainPhrase = false;
+	state == 'resuming';
 }
 
 function askTrainPhrase(phrase) {
@@ -693,31 +702,33 @@ function resumeChat() {
 		}
 		
 	} else if (trainPhrase) {
-		if (state == 'resuming') {
-			//iTurn--;
-			//iTurn--;
-			//iTurn_old = iTurn;
-			//iTurn = 0;
-			state = 'haltingClass';
-			conversationCorrection[1].name = man1;
-			conversationCorrection[1].phrase = conversation[iTurn-1].phrase;
-			conversationCorrection[2].phrase = conversation[iTurn-1].phrase;
-			if ((conversation[iTurn-2].name!=professora) && (conversation[iTurn-2].name!=user)) {
+		if (iTurn > 1) {
+			if (state == 'resuming') {
+				//iTurn--;
+				//iTurn--;
+				//iTurn_old = iTurn;
+				//iTurn = 0;
+				state = 'haltingClass';
+				conversationCorrection[1].name = man1;
+				conversationCorrection[1].phrase = conversation[iTurn-1].phrase;
+				conversationCorrection[2].phrase = conversation[iTurn-1].phrase;
 				conversationCorrection[1].name = conversation[iTurn-2].name;
 			}
-		}
-		if (state == 'haltingClass') {
-			say(conversationCorrection[0]);
-			state = 'repeatingPhrase';
-		} else if (state == 'repeatingPhrase') {
-			say(conversationCorrection[1]);
-			state = 'listeningPhrase';
-		} else if (state == 'listeningPhrase') {
-			listen(conversationCorrection[2])
-			trainPhrase = false;
-			//iTurn = iTurn_old;
-			//iTurn++;
-			state = 'resuming';
+			if (state == 'haltingClass') {
+				say(conversationCorrection[0]);
+				state = 'repeatingPhrase';
+			} else if (state == 'repeatingPhrase') {
+				say(conversationCorrection[1]);
+				state = 'listeningPhrase';
+			} else if (state == 'listeningPhrase') {
+				listen(conversationCorrection[2])
+				trainPhrase = false;
+				//iTurn = iTurn_old;
+				//iTurn++;
+				state = 'resuming';
+			}
+		} else {
+			cancelTrainPhrase();
 		}
 		
 	} else if (iTurn < conversation.length) {
