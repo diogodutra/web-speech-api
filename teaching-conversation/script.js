@@ -586,6 +586,14 @@ function pauseChat() {
 	recognition.stop();
 	synth.cancel();
 	oneBackChat();
+	
+	if (conversation[iTurn].name == user) {
+		iTurn--;
+	}
+	
+	if (iTurn < 0) {
+		iTurn = 0;
+	}
 }
 
 function oneBackChat() {
@@ -599,13 +607,6 @@ function playChat() {
 	chatPaused = false;
 	
 	/*
-	if (conversation[iTurn].name == user) {
-		iTurn--;
-	}
-	
-	if (iTurn < 0) {
-		iTurn = 0;
-	}
 	*/
 	
 	resumeChat();
