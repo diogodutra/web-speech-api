@@ -120,6 +120,7 @@ body {
   border-radius: 6px;
   width: 45%;
   max-width: 300px;
+  height: 380px;
 }
 
 .image-left {
@@ -143,6 +144,7 @@ body {
   height: 250px;
   width: 300px;
   width: 100%;
+  #height: 50%;
 }
 
 .image-left:after {
@@ -178,6 +180,7 @@ body {
   width: 250%;
   height: 150%;
   margin-top: -320px;
+  margin-top: -300px;
   max-width: 650px;
   max-height: 600px;
 }
@@ -225,6 +228,7 @@ body {
   left: 0;
   right: 0;
   text-align: center;
+  bottom: 0px;
 }
 
 .title {
@@ -269,6 +273,7 @@ body {
 
 .dialogBox {
   color:#fff;
+  margin-top: -10px;
 }
 
 
@@ -335,9 +340,11 @@ body {
 .scoring .box-content{
 	left: 0; 
 	z-index: 13;
+    width: 100%;
 }
 .box .title{
-    font-size: 100px;
+    font-size: 90px;
+    font-size: 450%;
     font-weight: 700;
     color: #1abc9c;
     letter-spacing: 1px;
@@ -348,6 +355,7 @@ body {
 .box .post{
     display: block;
     font-size: 60px;
+    font-size: 300%;
     font-weight: 600;
     font-style: italic;
     color: #fff;
@@ -664,11 +672,11 @@ MAIN CONTAINER
   width:1000px;
   #margin:0 auto;
   margin-top:30px;
-  padding-bottom:30px;
+  padding-bottom:20px;
   #display: flex;
   #justify-content: center;
   width:50%;
-  margin-top:10px;
+  margin-top:0px;
   margin: auto;
 }
 
