@@ -118,6 +118,8 @@ body {
   width: 300px;
   height: 400px;
   border-radius: 6px;
+  width: 45%;
+  max-width: 300px;
 }
 
 .image-left {
@@ -129,6 +131,7 @@ body {
   opacity: 0.9;
   height: 250px;
   width: 300px;
+  width: 100%;
 }
 
 .image-right {
@@ -139,6 +142,7 @@ body {
   opacity: 0.9;
   height: 250px;
   width: 300px;
+  width: 100%;
 }
 
 .image-left:after {
@@ -171,6 +175,11 @@ body {
   margin-left: -75%;
   margin-top: -140%;
   background: radial-gradient(#353535, #383737);
+  width: 250%;
+  height: 150%;
+  margin-top: -320px;
+  max-width: 650px;
+  max-height: 600px;
 }
 
 .wave:nth-child(2),
@@ -493,17 +502,21 @@ body {
 
 
 .buttonHolder{
-  margin:20px auto;
-  width:600px;
-  height:80px;
-  display: table-cell;
-  display: table;
-  display: flex;
-  #display: inline;
-  #display: block;
-  justify-content: center;
-  #align-items: center;
-  padding-left: 25px;
+	#margin:20px auto;
+	#margin: auto;
+	width:300px;
+	height:80px;
+	display: table-cell;
+	#display: table;
+	display: flex;
+	#display: inline;
+	#display: block;
+	justify-content: center;
+	#align-items: center;
+	padding-left: 50px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 
@@ -641,11 +654,14 @@ MAIN CONTAINER
 *****************************************/
 #container{
   width:1000px;
-  margin:0 auto;
+  #margin:0 auto;
   margin-top:30px;
   padding-bottom:10px;
   #display: flex;
   #justify-content: center;
+  width:50%;
+  margin-top:10px;
+  margin: auto;
 }
 
 /*****************************************
@@ -654,7 +670,8 @@ PROGRESS CONTAINER
 .progress{
   width:500px;
   float:left;
-  margin-left: 150px;
+  #margin-left: 150px;
+  width:100%;
 }
 
 /*****************************************
