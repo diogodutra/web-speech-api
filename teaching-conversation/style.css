@@ -309,11 +309,16 @@ body {
     transition: all 0.3s ease 0s;
 	z-index: 12;
 	#display: none;
+    top: 0px;
+    left: -100%;
 }
 .box:after {
 	#display: inline;
 }
-.scoring:before{ bottom: 0;}
+.scoring:before{
+	#bottom: 0;
+	left: 0;
+}
 .box img{
     width: 100%;
     height: auto;
@@ -324,10 +329,13 @@ body {
     position: absolute;
     bottom: 25px;
     left: -100%;
-    transition: all 0.3s ease 0.2s;
+    transition: all 0.3s ease 0.0s;
+	z-index: 13;
 }
-.scoring .box-content{ left: 0; 
-	z-index: 13;}
+.scoring .box-content{
+	left: 0; 
+	z-index: 13;
+}
 .box .title{
     font-size: 100px;
     font-weight: 700;
@@ -656,7 +664,7 @@ MAIN CONTAINER
   width:1000px;
   #margin:0 auto;
   margin-top:30px;
-  padding-bottom:10px;
+  padding-bottom:30px;
   #display: flex;
   #justify-content: center;
   width:50%;
@@ -779,27 +787,12 @@ TYPOGRAPHY CLASSES
 /*****************************************
 MAIN TITLE
 *****************************************/
-.title{
+.titleStylish{
   color:#555;
   font:30px Poiret One;
   #text-transform:uppercase;
   #text-shadow:#000 0px 2px 10px;
-  -webkit-box-reflect: below -15px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.2)));
+  #-webkit-box-reflect: below -15px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(50%, transparent), to(rgba(255,255,255,0.2)));
+  margin: 15px;
 }
-
-/*****************************************
-TAG CLASS
-*****************************************/
-.tag{
-  color:#8F8F8F;
-}
-
-/*****************************************
-SMALL SLASH
-*****************************************/
-.small{
-  font-size:12px;
-}
-
-
 
