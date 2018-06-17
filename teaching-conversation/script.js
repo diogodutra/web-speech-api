@@ -235,9 +235,13 @@ function populateVoiceList() {
     option.setAttribute('data-name', voices[i].name);
     //voiceSelect.appendChild(option);
 	
-	if (voices[i].name === professora) {voiceProf = voices[i];}
-	if (voices[i].name === lady1) {voiceLady = voices[i];}
-	if (voices[i].name === man1) {voiceMan = voices[i];}
+	//if (voices[i].name === professora) {voiceProf = voices[i];}
+	//if (voices[i].name === lady1) {voiceLady = voices[i];}
+	//if (voices[i].name === man1) {voiceMan = voices[i];}
+	
+	if (voices[i].lang == 'pt-BR') {voiceProf = voices[i];}
+	if ((voices[i].lang == 'en-GB') && ((voices[i].name).indexOf('Male')>=0)) {voiceMan = voices[i];}
+	if ((voices[i].lang == 'en-GB') && ((voices[i].name).indexOf('Female')>=0)) {voiceLady = voices[i];}
   }
   //voiceSelect.selectedIndex = selectedIndex;
 }
@@ -830,3 +834,4 @@ $(document).ready( function () {
   });
 });
 
+animScore('Teste',1);
