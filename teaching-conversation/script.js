@@ -6,6 +6,8 @@ var inputTxt = document.querySelector('.txt');
 //var inputTxt = document.querySelector('.triangle-border');
 var dialogBox = document.getElementById('triangle-border');
 var progressBar = document.getElementById('progressBar');
+var openPopup = document.getElementById('open-popup');
+
 
 //var pitch = document.querySelector('#pitch');
 //var pitchValue = document.querySelector('.pitch-value');
@@ -56,15 +58,7 @@ conversation1.push({name: 'professora', phrase: 'Fim da aula 1.'});
 
 var conversation2 = new Array();
 conversation2.push({name: professora, phrase: 'Aula de conversação 1.'});
-//conversation2.push({name: man1, phrase: 'Portuguese.'});
-//conversation2.push({name: user, phrase: 'Portuguese.', score:2});
-//conversation2.push({name: man1, phrase: 'Portuguese.'});
-//conversation2.push({name: user, phrase: 'Portuguese.', score:1});
-//conversation2.push({name: man1, phrase: '2.'});
-//conversation2.push({name: user, phrase: '2.'});
-//conversation2.push({name: man1, phrase: 'Portuguese.'});
-//conversation2.push({name: user, phrase: 'Portuguese.', score:2});
-//conversation2.push({name: professora, phrase: 'Aula de conversação 2.'});
+
 conversation2.push({name: professora, phrase: 'Escute essa conversa em inglês.'});
 conversation2.push({name: man1, phrase: 'Excuse me miss. Do you understand Portuguese?'});
 conversation2.push({name: lady1, phrase: 'No sir. I don\'t understand Portuguese.'});
@@ -77,7 +71,7 @@ conversation2.push({name: professora, phrase: 'Ele tenta conversar com ela.'});
 conversation2.push({name: professora, phrase: 'Então ele diz com licença.'});
 conversation2.push({name: professora, phrase: 'Apenas escute.'});
 conversation2.push({name: man1, phrase: 'Excuse me.'});
-conversation2.push({name: professora, phrase: 'Escute e repita.'});
+conversation2.push({name: professora, phrase: 'Escute e repita por partes.'});
 conversation2.push({name: man1, phrase: 'Excuse.'});
 conversation2.push({name: user, phrase: 'Excuse.'});
 conversation2.push({name: man1, phrase: 'Me.'});
@@ -90,7 +84,7 @@ conversation2.push({name: professora, phrase: 'Agora ele pergunta à moça se el
 conversation2.push({name: professora, phrase: 'Primeiro português.'});
 conversation2.push({name: professora, phrase: 'Apenas escute.'});
 conversation2.push({name: man1, phrase: 'Portuguese.'});
-conversation2.push({name: professora, phrase: 'Escute e repita.'});
+conversation2.push({name: professora, phrase: 'Escute e repita por partes.'});
 conversation2.push({name: man1, phrase: 'Port.'});
 conversation2.push({name: user, phrase: 'Port.'});
 conversation2.push({name: man1, phrase: '2.'});
@@ -101,11 +95,12 @@ conversation2.push({name: professora, phrase: 'Como se diz português na língua
 conversation2.push({name: user, phrase: 'Portuguese.', score: 1});
 conversation2.push({name: professora, phrase: 'Diga com licença.'});
 conversation2.push({name: user, phrase: 'Excuse me.', score: 1});
-conversation2.push({name: professora, phrase: 'Agora ele quer perguntar. você entende.'});
+conversation2.push({name: professora, phrase: 'Agora ele quer perguntar.'});
 conversation2.push({name: professora, phrase: 'Você entende?'});
 conversation2.push({name: professora, phrase: 'Apenas escute primeiro a palavra entende.'});
 conversation2.push({name: man1, phrase: 'Understand.'});
-conversation2.push({name: professora, phrase: 'Escute e repita.'});
+conversation2.push({name: professora, phrase: 'Escute e repita por partes.'});
+//3:30
 conversation2.push({name: man1, phrase: 'Under.'});
 conversation2.push({name: user, phrase: 'Under.'});
 conversation2.push({name: man1, phrase: 'Stand.'});
@@ -116,7 +111,7 @@ conversation2.push({name: professora, phrase: 'Como se diz entende em inglês?'}
 conversation2.push({name: user, phrase: 'Understand.', score: 1});
 conversation2.push({name: professora, phrase: 'Escute como se diz você entende.'});
 conversation2.push({name: man1, phrase: 'You understand.'});
-conversation2.push({name: professora, phrase: 'Escute e repita.'});
+conversation2.push({name: professora, phrase: 'Escute e repita por partes.'});
 conversation2.push({name: man1, phrase: 'You.'});
 conversation2.push({name: user, phrase: 'You.'});
 conversation2.push({name: man1, phrase: 'You understand.'});
@@ -125,17 +120,19 @@ conversation2.push({name: professora, phrase: 'Como se diz você em inglês?'});
 conversation2.push({name: user, phrase: 'You.', score: 1});
 conversation2.push({name: professora, phrase: 'Você se lembra de como se diz português?'});
 conversation2.push({name: user, phrase: 'Portuguese.', score: 1});
+//5:00
 conversation2.push({name: professora, phrase: 'Diga você entende.'});
 conversation2.push({name: user, phrase: 'You understand.', score: 1});
 conversation2.push({name: professora, phrase: 'Agora tente dizer. Você entende português.'});
 conversation2.push({name: user, phrase: 'You understand portuguese.', score: 2});
 conversation2.push({name: professora, phrase: 'Esta é uma palavra usada para fazer perguntas em inglês.'});
 conversation2.push({name: man1, phrase: 'Do.'});
-conversation2.push({name: professora, phrase: 'Escute e repita.'});
+conversation2.push({name: professora, phrase: 'Escute e repita a palavra.'});
 conversation2.push({name: man1, phrase: 'Do.'});
 conversation2.push({name: user, phrase: 'Do.'});
 conversation2.push({name: professora, phrase: 'Em inglês, muitas afirmações podem ser transformadas em perguntas pondo essa palavra no início da frase.'});
 conversation2.push({name: professora, phrase: 'Diga outra vez. Você entende.'});
+//6:00
 conversation2.push({name: user, phrase: 'You understand.', score: 1});
 conversation2.push({name: professora, phrase: 'Agora tente perguntar. Você entende?'});
 conversation2.push({name: user, phrase: 'Do you understand?', score: 2});
@@ -152,7 +149,7 @@ conversation2.push({name: lady1, phrase: 'No.'});
 conversation2.push({name: user, phrase: 'No.'});
 conversation2.push({name: professora, phrase: 'Agora ela vai dizer. Não, senhor.'});
 conversation2.push({name: lady1, phrase: 'No, sir.'});
-conversation2.push({name: professora, phrase: 'Escute e repita.'});
+conversation2.push({name: professora, phrase: 'Escute e repita por partes.'});
 conversation2.push({name: lady1, phrase: 'Sir.'});
 conversation2.push({name: user, phrase: 'Sir.'});
 conversation2.push({name: lady1, phrase: 'No, sir.'});
@@ -168,6 +165,7 @@ conversation2.push({name: user, phrase: 'Excuse me, sir.', score:1});
 conversation2.push({name: professora, phrase: 'Como você pergunta a alguém se ele entende?'});
 conversation2.push({name: user, phrase: 'Do you understand?', score: 1});
 conversation2.push({name: professora, phrase: 'Me pergunte se eu entendo português.'});
+//9:00
 conversation2.push({name: user, phrase: 'Do you understand portuguese?', score: 1});
 conversation2.push({name: professora, phrase: 'O homem diz a você. Eu entendo.'});
 conversation2.push({name: professora, phrase: 'Primeiro a palavra eu. Escute.'});
@@ -193,7 +191,212 @@ conversation2.push({name: professora, phrase: 'Como ela responde não senhor?'})
 conversation2.push({name: user, phrase: 'No, sir.', score:1});
 conversation2.push({name: professora, phrase: 'Como se diz eu entendo?'});
 conversation2.push({name: user, phrase: 'I understand.', score:1});
+//12:00
 conversation2.push({name: professora, phrase: 'Agora ela quer dizer. Eu não entendo.'});
+conversation2.push({name: lady1, phrase: 'I don\'t understand.'});
+conversation2.push({name: professora, phrase: 'Escute e repita a negativa.'});
+conversation2.push({name: lady1, phrase: 'Don\'t.'});
+conversation2.push({name: user, phrase: 'Don\'t.'});
+conversation2.push({name: professora, phrase: 'Diga. Eu não entendo.'});
+conversation2.push({name: user, phrase: 'I don\'t understand.', score: 1});
+conversation2.push({name: professora, phrase: 'Escute com cuidado o final do som.'});
+conversation2.push({name: lady1, phrase: 'Don\'t.'});
+conversation2.push({name: professora, phrase: 'Escute e repita a negativa.'});
+conversation2.push({name: lady1, phrase: 'Don\'t.'});
+conversation2.push({name: user, phrase: 'Don\'t.'});
+conversation2.push({name: professora, phrase: 'Esse final é acrescentado à palavra.'});
+conversation2.push({name: lady1, phrase: 'Do.'});
+conversation2.push({name: professora, phrase: 'Para inserir a negação.'});
+conversation2.push({name: professora, phrase: 'Escute e repita novamente.'});
+conversation2.push({name: lady1, phrase: 'Don\'t.'});
+conversation2.push({name: user, phrase: 'Don\'t.'});
+conversation2.push({name: lady1, phrase: 'I don\'t understand.'});
+conversation2.push({name: user, phrase: 'I don\'t understand.'});
+conversation2.push({name: professora, phrase: 'Agora diga outra vez. Eu não entendo.'});
+conversation2.push({name: user, phrase: 'I don\'t understand'});
+conversation2.push({name: professora, phrase: 'Diga. Português.'});
+conversation2.push({name: user, phrase: 'Portuguese.', score:1});
+conversation2.push({name: professora, phrase: 'Diga. Eu não entendo português.'});
+conversation2.push({name: user, phrase: 'I don\'t understand portuguese.', score:2});
+//14:00
+conversation2.push({name: professora, phrase: 'Pergunte. Você entende?'});
+conversation2.push({name: user, phrase: 'Do you understand?', score: 1});
+conversation2.push({name: professora, phrase: 'Pergunte se eu entendo português.'});
+conversation2.push({name: user, phrase: 'Do you understand portuguese?', score: 1});
+conversation2.push({name: professora, phrase: 'Responda. Não, eu não entendo.'});
+conversation2.push({name: user, phrase: 'No, I don\'t understand.', score:2});
+conversation2.push({name: professora, phrase: 'Diga. Eu não entendo português.'});
+conversation2.push({name: user, phrase: 'I don\'t understand portuguese.'});
+//15:00
+conversation2.push({name: professora, phrase: 'Esse é o nome do idioma inglês. Apenas escute.'});
+conversation2.push({name: man1, phrase: 'English.'});
+conversation2.push({name: professora, phrase: 'Escute e repita por partes.'});
+conversation2.push({name: man1, phrase: 'In.'});
+conversation2.push({name: user, phrase: 'In.'});
+conversation2.push({name: man1, phrase: 'English.'});
+conversation2.push({name: user, phrase: 'English.'});
+conversation2.push({name: professora, phrase: 'Diga outra vez. Inglês.'});
+conversation2.push({name: user, phrase: 'English.', score:1});
+conversation2.push({name: professora, phrase: 'Diga. Eu entendo.'});
+conversation2.push({name: user, phrase: 'I understand.', score:1});
+conversation2.push({name: professora, phrase: 'Diga. Eu entendo inglês.'});
+conversation2.push({name: user, phrase: 'I understand english.', score:2});
+//16:00
+conversation2.push({name: professora, phrase: 'E agora diga-me que você não entende inglês.'});
+conversation2.push({name: user, phrase: 'I don\'t understand english.', score:2});
+conversation2.push({name: professora, phrase: 'Diga. Você entende inglês.'});
+conversation2.push({name: user, phrase: 'You understand english.', score:1});
+conversation2.push({name: professora, phrase: 'Diga. Com licença.'});
+conversation2.push({name: user, phrase: 'Excuse me.', score:1});
+conversation2.push({name: professora, phrase: 'Pergunte-me se eu entendo inglês.'});
+conversation2.push({name: user, phrase: 'Do you understand english?', score: 2});
+//17:00
+conversation2.push({name: professora, phrase: 'É assim que se diz. Um pouco. Escute.'});
+conversation2.push({name: man1, phrase: 'A little.'});
+conversation2.push({name: professora, phrase: 'Escute e repita.'});
+conversation2.push({name: man1, phrase: 'A little.'});
+conversation2.push({name: user, phrase: 'A little.'});
+conversation2.push({name: professora, phrase: 'Diga. Um pouco.'});
+conversation2.push({name: user, phrase: 'A little.', score: 2});
+conversation2.push({name: professora, phrase: 'Agora tente dizer. Eu entendo um pouco.'});
+conversation2.push({name: user, phrase: 'I understand a little.', score: 2});
+conversation2.push({name: professora, phrase: 'Diga. Eu entendo inglês.'});
+conversation2.push({name: user, phrase: 'I understand english.', score: 1});
+conversation2.push({name: professora, phrase: 'Diga. Um pouco.'});
+conversation2.push({name: user, phrase: 'A little.', score: 1});
+conversation2.push({name: professora, phrase: 'Diga literalmente. Um pouco inglês.'});
+conversation2.push({name: user, phrase: 'A little english.', score: 2});
+conversation2.push({name: professora, phrase: 'Diga-me que você entende um pouco de inglês.'});
+conversation2.push({name: user, phrase: 'I understand a little english.', score: 2});
+//19:00
+conversation2.push({name: professora, phrase: 'Agora a moça quer te perguntar. Você é brasileiro?'});
+conversation2.push({name: professora, phrase: 'Escute a palavra brasileiro.'});
+conversation2.push({name: lady1, phrase: 'Brazilian.'});
+conversation2.push({name: professora, phrase: 'Escute e repita por partes.'});
+conversation2.push({name: lady1, phrase: 'Bra.'});
+conversation2.push({name: user, phrase: 'Bra.'});
+conversation2.push({name: lady1, phrase: 'Brazil.'});
+conversation2.push({name: user, phrase: 'Brazil.'});
+conversation2.push({name: lady1, phrase: 'Brazilian.'});
+conversation2.push({name: user, phrase: 'Brazilian.'});
+conversation2.push({name: professora, phrase: 'Diga. Brasileiro.'});
+conversation2.push({name: user, phrase: 'Brazilian.', score: 2});
+conversation2.push({name: professora, phrase: 'É assim que se diz. Você é. Escute.'});
+conversation2.push({name: lady1, phrase: 'You are.'});
+conversation2.push({name: professora, phrase: 'Escute e repita por partes.'});
+conversation2.push({name: lady1, phrase: 'You.'});
+conversation2.push({name: user, phrase: 'You.'});
+conversation2.push({name: lady1, phrase: 'You are.'});
+conversation2.push({name: user, phrase: 'You are.'});
+//20:00
+conversation2.push({name: professora, phrase: 'Diga. Você é.'});
+conversation2.push({name: user, phrase: 'You are.', score: 2});
+conversation2.push({name: professora, phrase: 'Diga. Você é brasileiro.'});
+conversation2.push({name: user, phrase: 'You are Brazilian.', score: 2});
+conversation2.push({name: professora, phrase: 'Diga outra vez. Você é.'});
+conversation2.push({name: user, phrase: 'You are.', score: 2});
+conversation2.push({name: professora, phrase: 'Para perguntar. Você é? Basta inverter as duas palavras em inglês.'});
+conversation2.push({name: professora, phrase: 'Agora tente perguntar. Você é brasileiro?'});
+conversation2.push({name: user, phrase: 'Are you Brazilian?', score: 2});
+conversation2.push({name: professora, phrase: 'Diga. Com licença.'});
+conversation2.push({name: user, phrase: 'Excuse me.', score: 1});
+conversation2.push({name: professora, phrase: 'Pergunte. Você entende inglês?'});
+conversation2.push({name: user, phrase: 'Do you understand english?', score: 2});
+conversation2.push({name: professora, phrase: 'Pergunte. Você entende português?'});
+conversation2.push({name: user, phrase: 'Do you understand portuguese?', score: 1});
+conversation2.push({name: professora, phrase: 'Pergunte. Você é brasileiro?'});
+conversation2.push({name: user, phrase: 'Are you Brazilian?', score: 1});
+conversation2.push({name: professora, phrase: 'Aqui está a palavra para sim. Apenas escute.'});
+conversation2.push({name: man1, phrase: 'Yes.'});
+conversation2.push({name: professora, phrase: 'Escute e repita.'});
+conversation2.push({name: man1, phrase: 'Yes.'});
+conversation2.push({name: user, phrase: 'Yes.'});
+conversation2.push({name: professora, phrase: 'Como se diz. Sim. Em inglês?'});
+conversation2.push({name: user, phrase: 'Yes.', score: 2});
+//22:00
+conversation2.push({name: professora, phrase: 'Escute a palavra senhorita.'});
+conversation2.push({name: man1, phrase: 'Miss.'});
+conversation2.push({name: professora, phrase: 'Escute e repita.'});
+conversation2.push({name: man1, phrase: 'Miss.'});
+conversation2.push({name: user, phrase: 'Miss.'});
+conversation2.push({name: professora, phrase: 'Agora diga. Sim, senhorita.'});
+conversation2.push({name: user, phrase: 'Yes, miss.', score: 2});
+conversation2.push({name: professora, phrase: 'Pergunte. Você é brasileiro?'});
+conversation2.push({name: user, phrase: 'Are you Brazilian?', score: 1});
+conversation2.push({name: professora, phrase: 'Responda. Sim, senhorita.'});
+conversation2.push({name: user, phrase: 'Yes, miss.', score: 1});
+conversation2.push({name: professora, phrase: 'Pergunte. Você entende português?'});
+conversation2.push({name: user, phrase: 'Do you understand portuguese?', score: 1});
+conversation2.push({name: professora, phrase: 'Não. Eu não entendo.'});
+conversation2.push({name: user, phrase: 'No. I don\'t understand.', score: 1});
+conversation2.push({name: professora, phrase: 'Diga. Eu não entendo português.'});
+conversation2.push({name: user, phrase: 'I don\'t understand portuguese.', score: 1});
+conversation2.push({name: professora, phrase: 'Diga. Eu entendo um pouco de inglês.'});
+conversation2.push({name: user, phrase: 'I understand a little english.', score: 1});
+//24:00
+conversation2.push({name: professora, phrase: 'Agora escute essa conversa em inglês.'});
+conversation2.push({name: professora, phrase: 'É a mesma que você escutou no início dessa aula a alguns minutos atrás.'});
+conversation2.push({name: man1, phrase: 'Excuse me miss. Do you understand Portuguese?'});
+conversation2.push({name: lady1, phrase: 'No sir. I don\'t understand Portuguese.'});
+conversation2.push({name: man1, phrase: 'I understand a little English.'});
+conversation2.push({name: lady1, phrase: 'Are you Brazilian?'});
+conversation2.push({name: man1, phrase: 'Yes miss.'});
+conversation2.push({name: professora, phrase: 'Escute outra vez.'});
+conversation2.push({name: man1, phrase: 'Excuse me, miss. Do you understand Portuguese?'});
+conversation2.push({name: lady1, phrase: 'No sir. I don\'t understand Portuguese.'});
+conversation2.push({name: man1, phrase: 'I understand a little English.'});
+conversation2.push({name: lady1, phrase: 'Are you Brazilian?'});
+conversation2.push({name: man1, phrase: 'Yes miss.'});
+conversation2.push({name: professora, phrase: 'Agora, imagine que você está sentado ao lado de uma jovem inglesa.'});
+conversation2.push({name: professora, phrase: 'Você quer conversar com ela. Como você inicia a conversa?'});
+conversation2.push({name: user, phrase: 'Excuse me, miss.', score: 2});
+conversation2.push({name: professora, phrase: 'Ela não te responde. Pergunte se ela te entende.'});
+conversation2.push({name: user, phrase: 'Do you understand?', score: 2});
+conversation2.push({name: professora, phrase: 'Ainda não há uma resposta. Agora pergunte se ela entende português.'});
+conversation2.push({name: user, phrase: 'Do you understand Portuguese?', score: 2});
+conversation2.push({name: professora, phrase: 'Como ela responde não senhor?'});
+conversation2.push({name: user, phrase: 'No, sir.', score: 2});
+conversation2.push({name: professora, phrase: 'Como ela te diz que não entende português?'});
+conversation2.push({name: lady1, phrase: 'I don\'t understand Portuguese.', score: 2});
+conversation2.push({name: professora, phrase: 'Como ela te pergunta se você entende inglês?'});
+conversation2.push({name: user, phrase: 'Do you understand English?', score: 2});
+conversation2.push({name: professora, phrase: 'Diga que você entende um pouco.'});
+conversation2.push({name: man1, phrase: 'I understand a little.', score: 2});
+conversation2.push({name: professora, phrase: 'Ela quer te perguntar se você é brasileiro. O que ela diz?'});
+conversation2.push({name: user, phrase: 'Are you Brazilian?', score: 2});
+conversation2.push({name: professora, phrase: 'Diga-lhe. Sim, senhorita.'});
+//27:00
+conversation2.push({name: user, phrase: 'Yes, miss.', score: 1});
+conversation2.push({name: professora, phrase: 'Vamos tentar essa conversa outra vez.'});
+conversation2.push({name: professora, phrase: 'Diga à moça. Com licença, senhorita.'});
+conversation2.push({name: man1, phrase: 'Excuse me, miss.', score: 1});
+conversation2.push({name: professora, phrase: 'Ela não te responde. Pergunte-lhe se ela te entende.'});
+conversation2.push({name: user, phrase: 'Do you understand?', score: 1});
+conversation2.push({name: professora, phrase: 'Ainda não há uma resposta. Agora pergunte-lhe se ela entende português.'});
+conversation2.push({name: user, phrase: 'Do you understand Portuguese?', score: 1});
+conversation2.push({name: professora, phrase: 'Como ela responde não senhor?'});
+conversation2.push({name: user, phrase: 'No, sir.', score: 1});
+conversation2.push({name: professora, phrase: 'Como ela te diz que não entende português?'});
+//28:00
+conversation2.push({name: lady1, phrase: 'I don\'t understand Portuguese.', score: 1});
+conversation2.push({name: professora, phrase: 'Como ela te pergunta se você entende inglês?'});
+conversation2.push({name: user, phrase: 'Do you understand English?', score: 1});
+conversation2.push({name: professora, phrase: 'Diga-lhe que você entende um pouco.'});
+conversation2.push({name: man1, phrase: 'I understand a little.', score: 1});
+conversation2.push({name: professora, phrase: 'Ela quer te perguntar se você é brasileiro. O que ela diz?'});
+conversation2.push({name: user, phrase: 'Are you Brazilian?', score: 1});
+conversation2.push({name: professora, phrase: 'Diga-lhe. Sim, senhorita.'});
+conversation2.push({name: user, phrase: 'Yes, miss.', score: 1});
+conversation2.push({name: professora, phrase: 'Agora ela vai te perguntar algo. Responda sinceramente com 2 palavras.'});
+//29:00
+conversation2.push({name: lady1, phrase: 'Do you understand Portuguese, sir?'});
+conversation2.push({name: user, phrase: 'Yes, miss.', score: 1});
+conversation2.push({name: professora, phrase: 'Ela vai te perguntar outra coisa.'});
+conversation2.push({name: professora, phrase: 'Responda com a expressão um pouco usando apenas 2 palavras.'});
+conversation2.push({name: lady1, phrase: 'Do you understand English?'});
+conversation2.push({name: user, phrase: 'A little.', score: 1});
+conversation2.push({name: professora, phrase: 'Parabéns! Agora você realmente entende um pouco inglês.'});
+
 conversation2.push({name: professora, phrase: 'Fim da aula.'});
 
 
@@ -215,6 +418,7 @@ var rewindBtn = document.querySelector('#rewindBtn');
 var voiceMan;
 var voiceLady;
 var voiceProf;
+var voiceLast;
 
 
 
@@ -302,8 +506,16 @@ function speak(){
 	}
 	*/
 	if (voiceActor == professora) utterThis.voice = voiceProf;
-	if (voiceActor == lady1) utterThis.voice = voiceLady;
-	if (voiceActor == man1) utterThis.voice = voiceMan;
+	if (voiceActor == lady1) {
+		utterThis.voice = voiceLady;
+		voiceLast = voiceLady;
+	}
+	if (voiceActor == man1) {
+		utterThis.voice = voiceMan;
+		voiceLast = voiceMan;
+	}
+	
+	if (trainPhrase && state=='repeatingPhrase') {utterThis.voice = voiceLast;}
 	
     utterThis.pitch = 1.0;//pitch.value;
     utterThis.rate = 1.0;//rate.value;
@@ -754,8 +966,9 @@ function resumeChat() {
 		
 		iTurn++;
 		//}, 0000);
-	} else {
+	} else if (iTurn > 0) {
 		//end of conversation
+		openPopup.click();
 	}
 	
   }
@@ -834,4 +1047,4 @@ $(document).ready( function () {
   });
 });
 
-animScore('Teste',1);
+//animScore('Teste',1);
