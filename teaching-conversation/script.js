@@ -42,7 +42,7 @@ conversationCorrection.push({name: '', phrase: ''});
 conversationCorrection.push({name: user, phrase: ''});
 
 var conversation1 = new Array();
-conversation1.push({name: 'professora', phrase: 'Aula de conversação 1.'});
+conversation1.push({name: 'professora', phrase: 'Aula de conversação 0.'});
 conversation1.push({name: 'professora', phrase: 'Uma senhora pede informação.'});
 conversation1.push({name: 'lady1', phrase: 'Excuse me. Do you know where is the restaurant?'});
 conversation1.push({name: 'student', phrase: 'No, I don\'t.'});
@@ -55,16 +55,16 @@ conversation1.push({name: 'professora', phrase: 'Fim da aula 1.'});
 
 
 var conversation2 = new Array();
-conversation2.push({name: professora, phrase: 'Aula de conversação 2.'});
-conversation2.push({name: man1, phrase: 'Portuguese.'});
-conversation2.push({name: user, phrase: 'Portuguese.', score:2});
-conversation2.push({name: man1, phrase: 'Portuguese.'});
-conversation2.push({name: user, phrase: 'Portuguese.', score:1});
+conversation2.push({name: professora, phrase: 'Aula de conversação 1.'});
+//conversation2.push({name: man1, phrase: 'Portuguese.'});
+//conversation2.push({name: user, phrase: 'Portuguese.', score:2});
+//conversation2.push({name: man1, phrase: 'Portuguese.'});
+//conversation2.push({name: user, phrase: 'Portuguese.', score:1});
 //conversation2.push({name: man1, phrase: '2.'});
 //conversation2.push({name: user, phrase: '2.'});
 //conversation2.push({name: man1, phrase: 'Portuguese.'});
 //conversation2.push({name: user, phrase: 'Portuguese.', score:2});
-conversation2.push({name: professora, phrase: 'Aula de conversação 2.'});
+//conversation2.push({name: professora, phrase: 'Aula de conversação 2.'});
 conversation2.push({name: professora, phrase: 'Escute essa conversa em inglês.'});
 conversation2.push({name: man1, phrase: 'Excuse me miss. Do you understand Portuguese?'});
 conversation2.push({name: lady1, phrase: 'No sir. I don\'t understand Portuguese.'});
@@ -194,7 +194,7 @@ conversation2.push({name: user, phrase: 'No, sir.', score:1});
 conversation2.push({name: professora, phrase: 'Como se diz eu entendo?'});
 conversation2.push({name: user, phrase: 'I understand.', score:1});
 conversation2.push({name: professora, phrase: 'Agora ela quer dizer. Eu não entendo.'});
-conversation2.push({name: professora, phrase: 'Fim da aula 2.'});
+conversation2.push({name: professora, phrase: 'Fim da aula.'});
 
 
 
